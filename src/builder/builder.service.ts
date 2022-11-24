@@ -17,6 +17,7 @@ export class BuilderService{
 
     async getAll():Promise<Builders[]>{
         return this.builderModule.find().populate('company_id')
+        
     }
     async findById(id:string): Promise<Builders>{
         return this.builderModule.findById(id)

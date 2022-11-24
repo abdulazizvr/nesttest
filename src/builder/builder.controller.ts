@@ -17,7 +17,7 @@ export class BuilderController{
         return this.builderService.getAll()
     }
     @Get(':id')
-    findOne(@Param('id',ParseIntPipe) id:string){
+    findOne(@Param('id') id:string){
         return this.builderService.findById(id)
     }
     @Put(':id')

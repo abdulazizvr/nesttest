@@ -27,4 +27,9 @@ export class CompanyService{
     async remove(id: string) :Promise<Company>{
         return this.companyModel.findByIdAndDelete(id);
     }
+
+    async findByName(name:string): Promise<Company>{
+        return this.companyModel.findOne({company_name:name})
+    }
+
 }

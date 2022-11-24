@@ -11,15 +11,12 @@ export class CheckCompanyInterceptor implements NestInterceptor{
     constructor(
         private readonly companyService: CompanyService   
         ){}
-    intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-        console.log("Beforee...")
+    async intercept(context: ExecutionContext, next: CallHandler):Promise<Observable<string>> {
         const req = context.switchToHttp().getRequest()
         const res = context.switchToHttp().getResponse()
-        console.log(req.body)
-        const data = this.companyService.findById(req.body.company_id)
-        console.log(data);
+        const data = await this.companyService.findById(req.body.company_id)
         if(!data){
-            res.json({message:'Bad Salary'})
+            res.json({message:'Id is Incorrect. Company_id not belong to  Company'})
         }else{
             const now = Date.now()
             return next

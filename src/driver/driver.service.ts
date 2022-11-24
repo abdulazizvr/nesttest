@@ -11,10 +11,7 @@ export class DriverService{
     constructor(@InjectModel(Driver.name) private driverModule: Model<DriverDocument>) {}
 
     async create(createDriverDto: createDriverDto){
-        console.log(createDriverDto)
-        const createdDriver = await new this.driverModule(createDriverDto);
-        console.log(createdDriver)
-        return createdDriver.save();
+        return  new this.driverModule(createDriverDto);
     }
 
     async getAll():Promise<Driver[]>{

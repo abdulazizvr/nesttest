@@ -1,5 +1,6 @@
-import {Controller,Get, Post,Body, Param, Put, Delete} from '@nestjs/common'
+import {Controller,Get, Post,Body, Param, Put, Delete, UseFilters, UsePipes,ValidationPipe} from '@nestjs/common'
 import { BuilderService } from 'src/builder/builder.service';
+import { HttpExceptionFilter } from 'src/errors/http-exception.filter';
 import {CompanyService} from './company.service'
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
@@ -12,8 +13,14 @@ export class CompanyController{
     private readonly builderService:BuilderService     
     ){}
     @Post()
+    // @UseFilters(new HttpExceptionFilter())
+    @UsePipes(ValidationPipe)
     create(@Body() createCompanyDto: CreateCompanyDto) {
-        return this.companyService.create(createCompanyDto);
+        try{
+            return this.companyService.create(createCompanyDto);
+        }catch(error){
+            throw new Error(error)
+        }
     }
     @Get()
     getAll() {
