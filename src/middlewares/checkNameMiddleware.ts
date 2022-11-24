@@ -7,7 +7,6 @@ export class CheckNameMiddleware implements NestMiddleware {
     constructor(private readonly companyService:CompanyService){}
     async use(req:Request,res:Response,next:NextFunction){
         const data = await this.companyService.findByName(req.body.company_name)
-        console.log(req.body.company_name)
         if(data){
             return res.json({message:"Name unique bo'lishi kerak!"})
         }
