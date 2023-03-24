@@ -14,7 +14,8 @@ import { ConfigModule } from "@nestjs/config";
 const environment = process.env.MODE_ENV || 'development';
 
 @Module({
-  imports: [ConfigModule.forRoot({envFilePath:`.env.${environment}`,isGlobal:true}),BuildersModule,TechnologyModule,DriverModule,CompanyModule,MongooseModule.forRoot(process.env.MONGO_URI)],
+  imports: [ConfigModule.forRoot({envFilePath:`.env`,isGlobal:true})
+  ,BuildersModule,TechnologyModule,DriverModule,CompanyModule,MongooseModule.forRoot(process.env.MONGO_URI)],
   controllers: [AppController],
   providers: [AppService],
 })

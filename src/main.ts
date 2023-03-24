@@ -10,7 +10,7 @@ const start = async () => {
     const app = await NestFactory.create(AppModule);
     app.use(logger)
     const adapterHost = app.get(HttpAdapterHost)
-    // app.useGlobalFilters(new AllExceptionsFilter(adapterHost))
+    app.useGlobalFilters(new AllExceptionsFilter(adapterHost))
     await app.listen(PORT, () => {
       console.log(`Server is running at ${PORT}`);
     });
