@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Req, UsePipes, ValidationPipe } from "@nestjs/common";
 import { TechnologyService } from "./technology.service";
 import { createTechnologyDto } from "./dto/create-technology.dto";
 import { updateTechnologyDto } from "./dto/update-technology.dto";
+import { AddDeviceInfoToRequest } from "../guards/adddeviceInfo";
 
 
 @Controller('technology')
@@ -16,6 +17,12 @@ export class TechnologyController{
     @Get()
     getAll() {
         return this.technologyService.getAll()
+    }
+
+    
+    @Get('device')
+    getHello(@AddDeviceInfoToRequest() req: Request) {
+        return 'Hello';    
     }
     @Get(':id')
     findOne(@Param('id') id:string){

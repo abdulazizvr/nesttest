@@ -16,8 +16,15 @@ export class TechnologyService{
     }
 
     async getAll():Promise<Technology[]>{
-        return this.technologyModule.find().populate('company_id')
+        return this.technologyModule.find().populate('company_id').populate('admin_id')
     }
+
+    // async getHello(headers: {'user-agent': string }): string {
+    //     const userAgent = headers['user-agent']; 
+    //     const result = this.deviceDetector.parse(userAgent);
+    //     console.log(JSON.stringify(result));
+    //     return 'Hello World!';
+    //   }
     async findById(id:string): Promise<Technology>{
         return this.technologyModule.findById(id)
     }
